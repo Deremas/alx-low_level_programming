@@ -1,5 +1,5 @@
 #include <stdio>
-/*
+/**
  * main - A program thst prints the size of various computer types
  *
  * Return: Always 0 (Success)
