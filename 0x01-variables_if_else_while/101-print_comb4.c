@@ -16,7 +16,7 @@ int main(void)
 	int m;
 	int a;
 
-	for (n = '0'; n <= '9'; n++)
+	for (n = '0'; n < '9'; n++)
 	{
 	for (m = n + 1; m <= '9'; m++)
 	{
