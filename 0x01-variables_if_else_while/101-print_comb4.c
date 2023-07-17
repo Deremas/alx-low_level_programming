@@ -20,7 +20,7 @@ int main(void)
 	{
 	for (m = n + 1; m <= '9'; m++)
 	{
-	for (a = n + 1; a <= '9'; a++)
+	for (a = m + 1; a <= '9'; a++)
 	{
 	if ((m != n) != a)
 	{
