@@ -1,4 +1,4 @@
-#include “main.h”
+#include "main.h"
 
 /**
 * _isupper -prog checks for uppercase letter
@@ -8,7 +8,7 @@
 
 int _isupper(int c)
 {
-if (c >= ‘A’ && c <= ‘Z’)
+if (c >= 65 && c <= 96)
 {
 return (1);
 }
