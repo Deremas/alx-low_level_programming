@@ -1,5 +1,3 @@
-#ifndef MAIN_N
-#define MAIN_N
 
 #include <stdio.h>
 #include <unistd.h>
