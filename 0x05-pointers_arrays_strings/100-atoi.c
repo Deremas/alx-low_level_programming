@@ -9,30 +9,18 @@
 int _atoi(char *s)
 
 {
-	int a = 0;
-	int b = 0;
-	int c = 0;
-	int d = 0;
+	unsigned int num = 0;
+	int sign = 1;
 
-	while (s[a])
-	{
-		if (s[a] == 45)
-		{
-			c *= -1;
-		}
-		while (s[a] >= 48 && s[a] <= 57)
-		{
-			d = 1;
-			b = (b * 10) + (s[a] - '0');
-			a++;
-		}
-		if (d == 1)
-		{
+	do {
+		if (*s == '-')
+			sign *= -1;
+		else if (*s >= '0' && *s <= '9')
+			num = (num * 10) + (*s - '0');
+		else if (num > 0)
 			break;
-		}
-		a++;
-	}
-	b *= c;
-	return (b);
+	} while (*s++);
+
+	return (num * sign);
 }
 
