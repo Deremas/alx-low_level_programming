@@ -1,3 +1,3 @@
 
 int _putchar(char c);
-int atol(char *s);
+int _atoi(char *s);
