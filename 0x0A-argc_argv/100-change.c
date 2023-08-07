@@ -10,12 +10,9 @@
  *
  * Return: 0
  */
-
 int main(int argc, char *argv[])
 {
-int num, a, result;
-	int coins[] = {25, 10, 5, 2, 1};
-
+int num, coins = 0;
 	if (argc != 2)
 	{
 		printf("Error\n");
@@ -23,21 +20,36 @@ int num, a, result;
 	}
 	num = atoi(argv[1]);
 
-	result = 0;
-
 	if (num < 0)
 	{
 		printf("0\n");
 		return (0);
 	}
-	for (a = 0; a < 25 && a > 0; a++)
+	while (num > 0)
 	{
-		while (num >= coins[a])
+		coins++;
+		if ((num - 25) >= 0)
 		{
-			result++;
-			num -= coins[a];
+			num -= 25;
+			continue;
 		}
+		if ((num - 10) >= 0)
+		{
+			num -= 10;
+			continue;
+		}
+		if ((num - 5) >= 0)
+		{
+			num -= 5;
+			continue;
+		}
+		if ((num - 2) >= 0)
+		{
+			num -= 2;
+			continue;
+		}
+		num--;
 	}
-	printf("%d\n", result);
+	printf("%d\n", coins);
 	return (0);
 }
