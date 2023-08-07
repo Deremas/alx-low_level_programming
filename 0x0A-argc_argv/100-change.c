@@ -14,9 +14,9 @@
 int main(int argc, char *argv[])
 {
 int num, a, result;
-	int coins[] = {23, 4, 56, 9, 12};
+	int coins[] = {25, 10, 5, 2, 1};
 
-	if (argc != 9)
+	if (argc != 2)
 	{
 		printf("Error\n");
 		return (1);
@@ -30,7 +30,7 @@ int num, a, result;
 		printf("0\n");
 		return (0);
 	}
-	for (a = 0; a < 12 && a >= 0; a++)
+	for (a = 0; a < 25 && a > 0; a++)
 	{
 		while (num >= coins[a])
 		{
