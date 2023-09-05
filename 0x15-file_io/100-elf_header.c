@@ -8,8 +8,7 @@
 
 /**
  * _is_elf - check if file is elf
- * @h: the header elf
- *
+ * @h: header elf
  * Return: void
  */
 
@@ -21,8 +20,7 @@ void _is_elf(char *h)
 
 /**
  * print_magic - print elf magic
- * @h: the elf header
- *
+ * @h: elf header
  * Return: void
  */
 
@@ -41,9 +39,8 @@ void print_magic(char *h)
 
 /**
  * print_class - print elf class
- * @h: the elf header
+ * @h: header
  * @bits64: 1 for 64 bits; 0 for 32bits; others: unknow
- *
  * Return: No Return
  */
 
@@ -63,8 +60,7 @@ void print_class(char *h, int bits64)
 
 /**
  * print_data - print elf data
- * @h: the elf header
- *
+ * @h: header
  * Return: void
  */
 
@@ -82,7 +78,6 @@ void print_data(char *h)
 /**
  * print_version - print elf data
  * @h: header
- *
  * Return: void
  */
 
@@ -102,7 +97,6 @@ void print_version(char *h)
 /**
  * print_os_abi - print elf data
  * @h: header
- *
  * Return: void
  */
 
@@ -151,10 +145,8 @@ void print_os_abi(char *h)
 /**
  * print_abiv - print elf data
  * @h: header
- *
  * Return: void
  */
-
 void print_abiv(char *h)
 {
 	printf("  %-35s", "ABI Version:");
@@ -165,10 +157,8 @@ void print_abiv(char *h)
  * print_type - print elf data
  * @h: header
  * @bitss64: if afk
- *
  * Return: void
  */
-
 void print_type(char *h, unsigned int bits64)
 {
 	int xtype = 17;
@@ -206,10 +196,8 @@ void print_type(char *h, unsigned int bits64)
  * print_entry_point_address - print antre point
  * @h: var of arrays
  * @bits42: you can declare fx for 64 bit
- *
  * Return void
  */
-
 void print_entry_point_address(char *h, unsigned int bits64)
 {
 int count = 27, i;
@@ -221,7 +209,7 @@ int count = 27, i;
 
 	if (h[5] == 1)
 	{
-
+		/* Little Endian */
 		i = count;
 		while (h[i] == 0 && i > 24)
 			i--;
@@ -236,7 +224,7 @@ int count = 27, i;
 	}
 	else
 	{
-
+		/* Big Endian */
 
 		i = 24;
 		while (h[i] == 0)
@@ -256,32 +244,30 @@ int count = 27, i;
 /**
  * main - entry point
  * @argc: number of argv
- * @argv: argument vector
- *
+ * @argv: argv
  * Return: 0
  */
-
 int main(int argc, char **argv)
 {
 	int fd_elf, r_elf, close_elf, bits64 = 0;
 	char h[16];
 
-
+	/*restrictions with exit 98*/
 	if (argc != 2)
 		dprintf(STDERR_FILENO, "wrong number of arguments\n"), exit(98);
 	if (argv[1] == 0)
 		dprintf(STDERR_FILENO, "Please enter a name, Null error\n"), exit(98);
-
+	/*create the fd of file*/
 	fd_elf = open(argv[1], O_RDONLY);
 	if (fd_elf == -1)
 		dprintf(STDERR_FILENO, "Can't open file\n"), exit(98);
-
+	/* reading the first 32 chars of header elf*/
 	r_elf = read(fd_elf, h, 32);
 	if (r_elf == -1)
 		dprintf(STDERR_FILENO, "Error Reading File\n"), exit(98);
-
+	/* check if is a elf: magic number, ELF */
 	_is_elf(h);
-
+	/* check if is for 64 bits = 1; else 32 = 0 */
 	if (h[4] == 2)
 		bits64 = 1;
 
@@ -294,6 +280,7 @@ int main(int argc, char **argv)
 	print_type(h, bits64);
 	print_entry_point_address(h, bits64);
 
+	/*close fd of elf*/
 	close_elf = close(fd_elf);
 	if (close_elf == -1)
 		dprintf(STDERR_FILENO, "Error closing FD Elf\n"), exit(98);
